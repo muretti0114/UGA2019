@@ -68,12 +68,12 @@ def calcul():
             showinfo('Result', 'The result says that it\'s Malignant\n\n accuracy : '+str(proba))
 
     except urllib2.HTTPError, error:
-        print("The request failed with status code: " + str(error.code))
-
+        # print("The request failed with status code: " + str(error.code))
+        showerror('The request failed with status code:' + str(error.code), json.loads(error.read()))
         # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-        print(error.info())
+        # print(error.info())
 
-        print(json.loads(error.read()))
+        # print(json.loads(error.read()))
     Tk.destroy
 
 bouton=Button(fenetre, text="Valider",command=calcul)
