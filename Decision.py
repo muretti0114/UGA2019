@@ -133,9 +133,9 @@ try:
         print("The best season for fertility is winter")
         if(childishDiseases == 0 or surgical == 0 or trauma == 0):
             print("You should go for a check")
-        else if(fever == -1 or fever == 0):
+        if(fever == -1 or fever == 0):
             print("You should wait for few month")
-        else:
+        if(smoking >= 0 or alcohol <= 3):
             print("Maybe you should try to change your habbits (less drinking or smoking for example)")
 except urllib2.HTTPError, error:
     print("The request failed with status code: " + str(error.code))
