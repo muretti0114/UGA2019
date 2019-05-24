@@ -63,9 +63,9 @@ def calcul():
         proba = result[151:(len(result)-7)]
 
         if(diagnosys=="0"):
-            showinfo('Result', 'The result says that it\'s Benign\n\n accuracy : '+str(proba))
+            showinfo('Result', 'The result says that it\'s Benign\n')
         else :
-            showinfo('Result', 'The result says that it\'s Malignant\n\n accuracy : '+str(proba))
+            showinfo('Result', 'The result says that it\'s Malignant\n')
 
     except urllib2.HTTPError, error:
         # print("The request failed with status code: " + str(error.code))
