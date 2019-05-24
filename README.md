@@ -8,6 +8,7 @@ Repository for Grenoble Projects in 2019
 - Bastien Zigmann (UGA)
 - Quentin Guerre-berthelot (UGA)
 - Lucas Gisselaire (UGA)
+- Lydie du Bousquet (UGA)
 
 ## Project Goal
 
