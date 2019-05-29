@@ -11,6 +11,33 @@ import json
 from tkinter.messagebox import *
 
 
+def isConnected():
+    try :
+        stri = "https://www.google.co.in"
+        data = urllib.request.urlopen(stri)
+        return True
+    except urllib.request.URLError:
+        return False
+
+def allValuesPositiv(data):
+	for i in range(0,3):
+			for j in range(0,10):
+				try :
+					if(data[j][i].get()<0.):
+						return False
+				except TclError :
+					x=1
+	return True
+
+def allValuesDouble(data):
+	for i in range(0,3):
+			for j in range(0,10):
+				try :
+					data[j][i].get()
+				except TclError :
+					return False
+	return True
+
 realValued =['radius','texture','perimeter','area','smoothness','compactness','concavity','concave points','symmetry','fractal dimension']
 fenetre = Tk()
 fenetre.title("Diagnosys")
@@ -38,12 +65,21 @@ for i in range(0,10):
 			values[i][len(values2[i])-1].grid(row=i+1, column=j, pady=5, padx=5)
 
 def calcul():
-	error = 0
-	for i in range(0,3):
-			for j in range(0,10):
-				print(values2[j][i].get())
 
-	if(error == 0):
+	def runningTest():
+		p =[]
+		if(not(isConnected())):
+			p.append('-Web Connection')
+
+		if(not(allValuesPositiv(values2))):
+			p.append('-Negatives Values')
+
+		if(not(allValuesDouble(values2))):
+			p.append('-Unespected Values (Only Double)')
+		return p
+
+	errors = runningTest()
+	if(len(errors) == 0):
 		val=[]
 
 		for i in range(0,3):
@@ -96,7 +132,11 @@ def calcul():
 
 		    # print(json.loads(error.read()))
 	else:
-		showerror('error','Checked the valued process there is an irregularity')
+		prob = ""
+		for i in range(0, len(errors)):
+			prob=prob+'\n'+errors[i]
+		showerror('error','Problems detected :\n'+prob)
+
 	Tk.destroy
 
 bouton=Button(fenetre, text="Valider",command=calcul)
