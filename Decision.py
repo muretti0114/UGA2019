@@ -159,7 +159,6 @@ data =  {
 body = str.encode(json.dumps(data))
 with open('url.txt','r') as file:
     url = file.read().replace('\n','')
-# url = 'https://ussouthcentral.services.azureml.net/workspaces/958400274ab54dac8d87114c07515abb/services/fa83783ce736417f94d3864ecf63b461/execute?api-version=2.0&details=true'
 with open('api_key.txt','r') as file:
     api_key = file.read().replace('\n','')
 headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
