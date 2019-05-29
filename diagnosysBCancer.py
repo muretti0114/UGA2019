@@ -1,12 +1,14 @@
-from Tkinter import * 
+from tkinter import * 
 # If you are using Python 3+, import tkinter instead of Tkinter
-import urllib2
+import urllib
+import urllib.request
+import urllib.error
 # If you are using Python 3+, import urllib instead of urllib2
 
 import json
-from tkMessageBox import *
+# from tkMessageBox import *
 #If you are using Python 3+
-#from tkinter.messagebox import *
+from tkinter.messagebox import *
 
 
 
@@ -47,10 +49,10 @@ def calcul():
     api_key = 'qW8bgwscpGsUz6nNLUYp95Ot1Kk5sx6m2byWd9Ja8SRw5e30ubrRpPNJeM8xftry6fWXvXVBexC9NEt+I/nhiQ=='
     headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
-    req = urllib2.Request(url, body, headers) 
+    req = urllib.request.Request(url, body, headers) 
 
     try:
-        response = urllib2.urlopen(req)
+        response = urllib.request.urlopen(req)
 
         # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
         # req = urllib.request.Request(url, body, headers) 
@@ -67,7 +69,7 @@ def calcul():
         else :
             showinfo('Result', 'The result says that it\'s Malignant\n')
 
-    except urllib2.HTTPError, error:
+    except urllib.error.HTTPError as error:
         # print("The request failed with status code: " + str(error.code))
         showerror('The request failed with status code:' + str(error.code), json.loads(error.read()))
         # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure

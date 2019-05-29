@@ -1,15 +1,17 @@
-from Tkinter import * 
+from tkinter import * 
 # If you are using Python 3+, import tkinter instead of Tkinter
-import urllib2
+import urllib
+import urllib.request
+import urllib.error
 # If you are using Python 3+, import urllib instead of urllib2
 
 import json
-from tkMessageBox import *
+# from tkMessageBox import *
 #If you are using Python 3+
-#from tkinter.messagebox import *
+from tkinter.messagebox import *
 
 
-
+realValued =['radius','texture','perimeter','area','smoothness','compactness','concavity','concave points','symmetry','fractal dimension']
 fenetre = Tk()
 fenetre.title("Diagnosys")
 
@@ -26,68 +28,75 @@ for i in range(0,10):
 	values2.append([])
 	for j in range(0,6):
 		if j%2==0 :
-			label = Label(fenetre, text="Val("+str(compteur)+")")
+			label = Label(fenetre, text=realValued[i])
 			label.grid(row=i+1, column=j, pady=5, padx=5)
 			compteur+=1
 		else :
 			values2[i].append(DoubleVar())
-			values2[i][j/2].set(0.)
-			values[i].append(Entry(fenetre,textvariable=values2[i][j/2], width=10))
-			values[i][j/2].grid(row=i+1, column=j, pady=5, padx=5)
+			values2[i][len(values2[i])-1].set(0.)
+			values[i].append(Entry(fenetre,textvariable=values2[i][len(values2[i])-1], width=10))
+			values[i][len(values2[i])-1].grid(row=i+1, column=j, pady=5, padx=5)
 
 def calcul():
-	val=[]
+	error = 0
+	for i in range(0,3):
+			for j in range(0,10):
+				print(values2[j][i].get())
 
-	for i in range(0,10):
-		for j in range(0,3):
-			val.append(values2[i][j].get())
+	if(error == 0):
+		val=[]
 
-	data =  {
+		for i in range(0,3):
+			for j in range(0,10):
+				val.append(values2[j][i].get())
 
-        "Inputs": {
+		data =  {
 
-                "lol":
-                {
-                    "ColumnNames": ["real-valued(1)", "real-valued(2)", "real-valued(3)", "real-valued(4)", "real-valued(5)", "real-valued(6)", "real-valued(7)", "real-valued(8)", "real-valued(9)", "real-valued(10)", "real-valued(11)", "real-valued(12)", "real-valued(13)", "real-valued(14)", "real-valued(15)", "real-valued(16)", "real-valued(17)", "real-valued(18)", "real-valued(19)", "real-valued(20)", "real-valued(21)", "real-valued(22)", "real-valued(23)", "real-valued(24)", "real-valued(25)", "real-valued(26)", "real-valued(27)", "real-valued(28)", "real-valued(29)", "real-valued(30)"],
-                    "Values": [val,]
-                },        },
-            "GlobalParameters": {
-	}
-	    }
+	        "Inputs": {
 
-	body = str.encode(json.dumps(data))
+	                "lol":
+	                {
+	                    "ColumnNames": ["real-valued(1)", "real-valued(2)", "real-valued(3)", "real-valued(4)", "real-valued(5)", "real-valued(6)", "real-valued(7)", "real-valued(8)", "real-valued(9)", "real-valued(10)", "real-valued(11)", "real-valued(12)", "real-valued(13)", "real-valued(14)", "real-valued(15)", "real-valued(16)", "real-valued(17)", "real-valued(18)", "real-valued(19)", "real-valued(20)", "real-valued(21)", "real-valued(22)", "real-valued(23)", "real-valued(24)", "real-valued(25)", "real-valued(26)", "real-valued(27)", "real-valued(28)", "real-valued(29)", "real-valued(30)"],
+	                    "Values": [val,]
+	                },        },
+	            "GlobalParameters": {
+		}
+		    }
 
-	url = 'https://ussouthcentral.services.azureml.net/workspaces/b0469c7e953f4bc992e2134488dec084/services/a218f94199bb496d9fc01b7307c3ce8c/execute?api-version=2.0&details=true'
-	api_key = 'qW8bgwscpGsUz6nNLUYp95Ot1Kk5sx6m2byWd9Ja8SRw5e30ubrRpPNJeM8xftry6fWXvXVBexC9NEt+I/nhiQ=='
-	headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+		body = str.encode(json.dumps(data))
 
-	req = urllib2.Request(url, body, headers) 
+		url = 'https://ussouthcentral.services.azureml.net/workspaces/b0469c7e953f4bc992e2134488dec084/services/a218f94199bb496d9fc01b7307c3ce8c/execute?api-version=2.0&details=true'
+		api_key = 'qW8bgwscpGsUz6nNLUYp95Ot1Kk5sx6m2byWd9Ja8SRw5e30ubrRpPNJeM8xftry6fWXvXVBexC9NEt+I/nhiQ=='
+		headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
-	try:
-	    response = urllib2.urlopen(req)
+		req = urllib.request.Request(url, body, headers) 
 
-	    # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
-	    # req = urllib.request.Request(url, body, headers) 
-	    # response = urllib.request.urlopen(req)
+		try:
+		    response = urllib.request.urlopen(req)
 
-	    result = response.read()
-	    #1 malign else begnin
-	    diagnosys = result[147]
-	    
-	    proba = result[151:(len(result)-7)]
+		    # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
+		    # req = urllib.request.Request(url, body, headers) 
+		    # response = urllib.request.urlopen(req)
 
-	    if(diagnosys=="0"):
-	    	showinfo('Result', 'The result says that it\'s Benign\n\n accuracy : '+str(proba))
-	    else :
-	    	showinfo('Result', 'The result says that it\'s Malignant\n\n accuracy : '+str(proba))
+		    result = response.read().decode('utf-8')
+		    rep = json.loads(result)
+		    #1 malign else begnin
 
-	except urllib2.HTTPError, error:
-	    print("The request failed with status code: " + str(error.code))
+		    if(rep['Results']['output1']['value']['Values'][0][0]=="0"):
+		    	showinfo('Result', 'The result says that it\'s Benign\n')
+		    else :
+		    	showinfo('Result', 'The result says that it\'s Malignant\n')
 
-	    # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-	    print(error.info())
+		except urllib.error.HTTPError as error:
+			showerror('The request failed with status code:' + str(error.code), json.loads(error.read()))
+		    # print("The request failed with status code: " + str(error.code))
 
-	    print(json.loads(error.read()))
+		    # # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+		    # print(error.info())
+
+		    # print(json.loads(error.read()))
+	else:
+		showerror('error','Checked the valued process there is an irregularity')
 	Tk.destroy
 
 bouton=Button(fenetre, text="Valider",command=calcul)
