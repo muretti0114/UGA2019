@@ -42,7 +42,14 @@ realValued =['radius','texture','perimeter','area','smoothness','compactness','c
 fenetre = Tk()
 fenetre.title("Diagnosys")
 
-label = Label(fenetre, text="Enter the values:")
+FrameCells = Frame(fenetre, borderwidth=2, relief=GROOVE)
+FrameCells.grid(row=1, column=1, pady=5, padx=5)
+
+FrameField = Frame(fenetre, borderwidth=2, relief=GROOVE)
+FrameField.grid(row=2, column=1, pady=5, padx=5)
+
+
+label = Label(FrameCells, text="Enter the values:")
 label.grid(row=0, columnspan=2, pady=8)
 
 compteur = 1
@@ -55,13 +62,13 @@ for i in range(0,10):
 	values2.append([])
 	for j in range(0,6):
 		if j%2==0 :
-			label = Label(fenetre, text=realValued[i])
+			label = Label(FrameCells, text=realValued[i])
 			label.grid(row=i+1, column=j, pady=5, padx=5)
 			compteur+=1
 		else :
 			values2[i].append(DoubleVar())
 			values2[i][len(values2[i])-1].set(0.)
-			values[i].append(Entry(fenetre,textvariable=values2[i][len(values2[i])-1], width=10))
+			values[i].append(Entry(FrameCells,textvariable=values2[i][len(values2[i])-1], width=10))
 			values[i][len(values2[i])-1].grid(row=i+1, column=j, pady=5, padx=5)
 
 def calcul():
@@ -138,11 +145,48 @@ def calcul():
 		showerror('error','Problems detected :\n'+prob)
 
 	Tk.destroy
+valuesField = StringVar()
+label = Label(FrameField, text="field values from a list (val1 ,..., Val30) : ")
+label.grid(row=1, column=1, pady=5, padx=5)
+valuesField.set("0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+entree=Entry(FrameField,textvariable=valuesField, width=60)
+entree.grid(row=2, column=1, pady=5, padx=5)
 
-bouton=Button(fenetre, text="Valider",command=calcul)
-bouton.grid(row=11, column=4, pady=5, padx=5)
-bouton=Button(fenetre, text="Fermer", command=fenetre.quit)
-bouton.grid(row=11, column=1, pady=5, padx=5)
+def field() :
+	f = valuesField.get()
+	fieldingValues = f.split(",")
+	i=0
+	j=0
+	for w in range(0,len(fieldingValues)):
+		if w<30 :
+			values2[j][i].set(fieldingValues[w])
+			if j==9 :
+				i=(i+1)%3
+			j=(j+1)%10
+
+def clear() :
+	f = valuesField.get()
+	fieldingValues = f.split(",")
+	valuesField.set('')
+	i=0
+	j=0
+	for w in range(0,len(fieldingValues)):
+		if w<30 :
+			values2[j][i].set('0.0')
+			if j==9 :
+				i=(i+1)%3
+			j=(j+1)%10
+
+
+bouton=Button(FrameField, text="Field",background='ivory',command=field)
+bouton.grid(row=2, column=3, pady=5, padx=5)
+bouton=Button(FrameField, text="clear",background='ivory',command=clear)
+bouton.grid(row=2, column=4, pady=5, padx=5)
+bouton=Button(FrameField, text="Valider",background='green',command=calcul)
+bouton.grid(row=3, column=4, pady=5, padx=5)
+bouton=Button(FrameField, text="Fermer", background='red',command=fenetre.quit)
+bouton.grid(row=3, column=1, pady=5, padx=5)
+
 
 
 fenetre.mainloop()
