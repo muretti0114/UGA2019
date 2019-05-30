@@ -85,31 +85,40 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 ### White wine quality prediction (Lucas)
 1. Project motivation:
+
 	My idea is to create a model which tries to assign a quality indicator (subjective) to a wine bottle depending on the physical (objective) properties of the bottle. 
 	By computing the quality of a given bottle, wine resellers may be able to infer the popularity of said bottle without relying on market studies or other non-automatic models which may very well be both less accurate and more expensive.
 
 2. Risk study:
+
 	While the concept seems interesting on paper, we can easily think of multiple things that can go wrong or induce other problems. Namely:
 
 	* The quality prediction is straight-up wrong:
+
 		While prediction models do use some of the initial data for testing which makes the model more robust, wrong predictions CAN definitely occur because of the model's non-deterministic nature.
 
 	* Input fed to the model is too different from training data:
+
 		Because of the relatively low sample size of the initial dataset (~5000 rows), it is easy to imagine that a bottle fed to the model has physical properties very much different from those of the initial dataset. This disparity may in turn induce a wrong prediction.
 
 	* Web (remote) service is unavailable or compromised:
+
 		The application relies on a remote service to make its predictions; if the service becomes unavailable or compromised, then either no predictions will be able to be made whatsoever, or the predictions will have no value.
 		
 3. Minimizing the risks:
+
 	Because the model is unpredictable by nature, it is clear that the probability of a problem occuring will never be null; however, I will try looking into ways to minimize the risks I recognized in the last step:
 
 	* Wrong prediction:
+
 		On top of the prediction, a "prediction quality indicator" could be computed to judge the quality of a prediction; for example, a bottle of quality 5.5 with 99% accuracy may be safer/more marketable than a bottle of quality 6.5 with 10% accuracy. All in all, this would probably give more sense & value to a prediction.
 
 	* "Bad" input:
+
 		To prevent users from trying to predict the quality of bottles that the model may not be able to properly handle, I could limit the input to certain pre-determined intervals so as to ensure that the input data is kept in the range of the initial training data. In the same fashion, I could compute a "data ressemblance" factor and only accept inputs within a given range to feed the model.
 
 	* Web service reliance:
+
 		- Warn the user when the service becomes unreachable.
 		- Add security mechanisms (key-based encryption & authentification) to ensure that the prediction is reliable.
 
