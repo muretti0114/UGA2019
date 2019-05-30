@@ -100,7 +100,7 @@ print("--------------------------------------------------------------")
 #Getting informations about potential high fever in the past year
 fever = -2
 while(fever != -1 and fever != 0 and fever != 1):
-    entry = input("Did you had high fever during last year?\n-1:less than three months ago\n 0:more than 3 months ago\n 1:no\n")
+    entry = input("Did you had high fever during last year?\n-1:less than three months ago\n 0:more than tree months ago\n 1:no\n")
     try:
         fever = int(entry)
     except ValueError:
@@ -134,7 +134,7 @@ print("--------------------------------------------------------------")
 #Getting informations about time spent sit in a day
 hoursSit = -1
 while(hoursSit < 0 or hoursSit > 24):
-    entry = input("How much do you spend sit per day?\n")
+    entry = input("How much time do you spend sit per day?\n")
     try:
         hoursSit = int(entry)
     except ValueError:
