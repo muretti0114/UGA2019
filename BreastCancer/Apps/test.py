@@ -108,8 +108,11 @@ def calcul():
 
 		body = str.encode(json.dumps(data))
 
-		url = 'https://ussouthcentral.services.azureml.net/workspaces/b0469c7e953f4bc992e2134488dec084/services/a218f94199bb496d9fc01b7307c3ce8c/execute?api-version=2.0&details=true'
-		api_key = 'qW8bgwscpGsUz6nNLUYp95Ot1Kk5sx6m2byWd9Ja8SRw5e30ubrRpPNJeM8xftry6fWXvXVBexC9NEt+I/nhiQ=='
+		file_Key = open("../SecuAccess/Api_key.txt", "r")
+		file_url = open("../SecuAccess/Web_Service.txt", "r")
+
+		url = file_url.read()
+		api_key = file_Key.read()
 		headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 		req = urllib.request.Request(url, body, headers) 
