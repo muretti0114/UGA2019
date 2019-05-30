@@ -45,6 +45,7 @@ And the woman would be allowed to compute this features in the Application and k
 Lyke that they'll know if they need to go see a doctor or juste wate to see how it turned.
 2. Risks :
 	There is many kind of risks :
+	
 		* The accuracy should be really high :
 		If it isn't then in one case, it could only be a false alarm that is not threatening but only scaring. But in the other case it could be really dangerous for the woman thinking that it's not malignant and let the cancer spread without taking action against it.
 
