@@ -48,8 +48,11 @@ def UnusualValues(data,p):
 
 	body = str.encode(json.dumps(dat))
 
-	url = 'https://ussouthcentral.services.azureml.net/workspaces/b0469c7e953f4bc992e2134488dec084/services/6558977158864036ad90d9c395f96b2b/execute?api-version=2.0&details=true'
-	api_key = 'x8YbOW9NUtjFZ89++fVbPMhPGcyobzM77Rk4GghCXpFwvWZIjFejSg1FLWgubY28dBznnvxF4GA3xUey1vCt+A==' 
+	file_Key = open("../SecuAccess/Api_key_stat.txt", "r")
+	file_url = open("../SecuAccess/Web_Service_stat.txt", "r")
+
+	url = file_url.read()
+	api_key = file_Key.read()
 	headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 	req = urllib.request.Request(url, body, headers) 
