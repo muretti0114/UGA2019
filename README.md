@@ -122,6 +122,38 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 		- Warn the user when the service becomes unreachable.
 		- Add security mechanisms (key-based encryption & authentification) to ensure that the prediction is reliable.
 
+### Florian's Application : Student Performance Prediction 
+
+1. Project motivation : 
+
+To stay in the theme, I chosen to study the differents factors which affects a student during his scholar year. For this, I finded an interesting dataset about India's students informations, with a column which indicates the "End semester Percentage", in another words, if a student will pass achieve the university year. That's the most interesting field, so we'll try to predict it.
+It could be a very interesting algorithms for all Indian Universitys which wants to select the students who deserve the most.
+
+2. Risk & Threats Investivation
+
+Evidently, all applications of this kind needs to be secured on all there differents modules/services that it is used.
+So here is all of my investigation results : 
+
+- All the datas needs to be set and correctly set
+
+- Internet connection needs to be ok
+
+- API Key for Azure Machine Learning needs to be encrypted
+
+- To go further, an implementation of signatures messaging to compare them between the emission and reception of datas could be interesting
+( to avoid data tampering )
+
+3. Security Implementation
+
+So to implements all of the security issues above, here is my plan :
+
+- To be sure that all the data are present with integrity I opted for Listbox selection with Tkinter, thus pre-defined data needs to be selected also.
+
+- About Internet connection, a simple check to azure website in python is enough.
+
+- For the API Key privacy, I stored it in a private local file.
+
+- To go further, Azure Keyvault looks like very interesting to verify signatures between messages.
 
 ## Deliverables
 
