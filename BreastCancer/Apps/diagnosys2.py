@@ -42,11 +42,6 @@ realValued =['radius','texture','perimeter','area','smoothness','compactness','c
 fenetre = Tk()
 fenetre.title("Diagnosys")
 
-menubar = Menu(fenetre)
-ExampleMenu = Menu(menubar, tearoff=0)
-menubar.add_command(label="Leave", command=fenetre.quit)
-
-
 FrameCells = Frame(fenetre, borderwidth=2, relief=GROOVE)
 FrameCells.grid(row=1, column=1, pady=5, padx=5)
 
@@ -185,25 +180,6 @@ def clear() :
 				i=(i+1)%3
 			j=(j+1)%10
 
-def ExMalignant() :
-	valuesField.set('17.99,10.38,122.8,1001,0.1184,0.2776,0.3001,0.1471,0.2419,0.07871,1.095,0.9053,8.589,153.4,0.006399,0.04904,0.05373,0.01587,0.03003,0.006193,25.38,17.33,184.6,2019,0.1622,0.6656,0.7119,0.2654,0.4601,0.1189')
-	field()
-
-def ExBegnin() :
-	valuesField.set('13.54,14.36,87.46,566.3,0.09779,0.08129,0.06664,0.04781,0.1885,0.05766,0.2699,0.7886,2.058,23.56,0.008462,0.0146,0.02387,0.01315,0.0198,0.0023,15.11,19.26,99.7,711.2,0.144,0.1773,0.239,0.1288,0.2977,0.07259')
-	field()
-
-def Help():
-	showinfo('Help','######################\nThe App for the diagnosys of Brest Cancer is lunch\npython version : 3\n######################\n\nfew things to know :\n- To run the App successfully you will need the Security file <SecuAccess> \nstore in BreastCancer file.\n\n- On the main page there are some text field, the easiest way to field them,\nis to field the text field that take a list of values and automaticly field \nall the other ones.\n\n- there is a sample of values in the file <wdbc.data> the explications of this\nsample is in the file <wdbc.names>.' )
-
-
-
-ExampleMenu.add_command(label="EX.Malignant", command=ExMalignant)
-ExampleMenu.add_command(label="EX.Begnin", command=ExBegnin)
-menubar.add_command(label="Help", command=Help)
-menubar.add_cascade(label="Examples", menu=ExampleMenu)
-
-fenetre.config(menu=menubar)
 
 bouton=Button(FrameField, text="Field",background='ivory',command=field)
 bouton.grid(row=2, column=3, pady=5, padx=5)
@@ -211,6 +187,8 @@ bouton=Button(FrameField, text="clear",background='ivory',command=clear)
 bouton.grid(row=2, column=4, pady=5, padx=5)
 bouton=Button(FrameField, text="Valider",background='green',command=calcul)
 bouton.grid(row=3, column=4, pady=5, padx=5)
+bouton=Button(FrameField, text="Fermer", background='red',command=fenetre.quit)
+bouton.grid(row=3, column=1, pady=5, padx=5)
 
 
 
