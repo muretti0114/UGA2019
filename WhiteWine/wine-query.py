@@ -46,7 +46,8 @@ def get_dataset_summary(data_summary):
     }
     body = str.encode(json.dumps(placeholder_data))
     url = 'https://ussouthcentral.services.azureml.net/workspaces/82c5bb7ddffd42caa5864158ef8523f8/services/4fd0abcedae8409f9676cf60e6a7f5ba/execute?api-version=2.0&details=true'
-    api_key = 'Xpn8o+++l3odBNtuVG+xBNUNoS9LSsRC0eZmQejdtgIby0tW32xX62WlLJnWu0bW45cxvujpQyOV5fYc1iEzMw=='
+    with open('api_key_metadata.txt', 'r') as file:
+        api_key = file.read().replace('\n', '')
     headers = {'Content-Type': 'application/json',
                'Authorization': ('Bearer ' + api_key)}
     req = urllib.request.Request(url, body, headers)
@@ -67,7 +68,8 @@ def get_query_results(request_data, result_storage):
     # web API
     body = str.encode(json.dumps(request_data))
     url = 'https://ussouthcentral.services.azureml.net/workspaces/82c5bb7ddffd42caa5864158ef8523f8/services/ee897c9726c14d8b8eea41ea2f6778ee/execute?api-version=2.0&details=true'
-    api_key = 'uIemc6Mt+ED0qSubag0ABB197ri0q9K/VkrymacG6gsQBH/zUIhb7gTxUheRzqfI3kb7JFx5BdVtPYPXZP9InA=='
+    with open('api_key_prediction.txt', 'r') as file:
+        api_key = file.read().replace('\n', '')
     headers = {'Content-Type': 'application/json',
                'Authorization': ('Bearer ' + api_key)}
 
