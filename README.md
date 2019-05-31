@@ -125,6 +125,8 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 ## Deliverables
 
+- Quentin App : run the script [StartBCancerDiagnosys.sh](./StartBCancerDiagnosys.sh)
+
 - [Application Examples](./examples/)
 
 
