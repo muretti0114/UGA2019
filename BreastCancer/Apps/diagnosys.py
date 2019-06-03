@@ -21,6 +21,7 @@ def isConnected():
     except urllib.request.URLError:
         return False
 
+
 def allValuesPositiv(data):
 	for i in range(0,3):
 			for j in range(0,10):
@@ -48,51 +49,58 @@ def UnusualValues(data,p):
 
 	body = str.encode(json.dumps(dat))
 
-	file_Key = open("../SecuAccess/Api_key_stat.txt", "r")
-	file_url = open("../SecuAccess/Web_Service_stat.txt", "r")
+	OK=True
 
-	url = file_url.read()
-	api_key = file_Key.read()
-	headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+	try :
+		file_Key = open("../SecuAccess/Api_key_stat.txt", "r")
+		api_key = file_Key.read()
+		file_url = open("../SecuAccess/Web_Service_stat.txt", "r")
+		url = file_url.read()
+	except FileNotFoundError :
+		OK=False
+		showerror('Security File not found', 'You probably don\'t have The Security File contact the responsable ')
 
-	req = urllib.request.Request(url, body, headers) 
+	if OK :
+		headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
-	try:
-		response = urllib.request.urlopen(req)
+		req = urllib.request.Request(url, body, headers) 
 
-	    # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
-	    # req = urllib.request.Request(url, body, headers) 
-	    # response = urllib.request.urlopen(req)
+		try:
+			response = urllib.request.urlopen(req)
 
-		result = response.read().decode('utf-8')
-		rep = json.loads(result)
-		unusual=""
-		for i in range(0,10):
-			mi = float(rep ['Results']['output1']['value']['Values'][i][0])
-			ma = float(rep['Results']['output1']['value']['Values'][i][1])
-			ecartType  =float(rep['Results']['output1']['value']['Values'][i][2])
+		    # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
+		    # req = urllib.request.Request(url, body, headers) 
+		    # response = urllib.request.urlopen(req)
 
-			for j in range(1,3):
-				if mi > float(rep['Results']['output1']['value']['Values'][i+(10*j)][0]):
-					mi = float(rep['Results']['output1']['value']['Values'][i+(10*j)][0])
-				if ma < float(rep['Results']['output1']['value']['Values'][i+(10*j)][1]) :
-					ma = float(rep['Results']['output1']['value']['Values'][i+(10*j)][1])
-				if ecartType < float(rep['Results']['output1']['value']['Values'][i+(10*j)][2]) :
-					ecartType =float(rep['Results']['output1']['value']['Values'][i+(10*j)][2])
-			
-			for t in range(0,3):
-				try :
-					if (not(data[i][t].get()<(ma+ecartType) and data[i][t].get()>(mi-ecartType))):
-						unusual =unusual+ '\n'+ realValued[i] + "No" + str(t+1) + ","
-				except TclError :
-					print("problemes de data")
+			result = response.read().decode('utf-8')
+			rep = json.loads(result)
+			unusual=""
+			for i in range(0,10):
+				mi = float(rep ['Results']['output1']['value']['Values'][i][0])
+				ma = float(rep['Results']['output1']['value']['Values'][i][1])
+				ecartType  =float(rep['Results']['output1']['value']['Values'][i][2])
 
-	except urllib.error.HTTPError as error:
-	    unusual="error while reading"
+				for j in range(1,3):
+					if mi > float(rep['Results']['output1']['value']['Values'][i+(10*j)][0]):
+						mi = float(rep['Results']['output1']['value']['Values'][i+(10*j)][0])
+					if ma < float(rep['Results']['output1']['value']['Values'][i+(10*j)][1]) :
+						ma = float(rep['Results']['output1']['value']['Values'][i+(10*j)][1])
+					if ecartType < float(rep['Results']['output1']['value']['Values'][i+(10*j)][2]) :
+						ecartType =float(rep['Results']['output1']['value']['Values'][i+(10*j)][2])
+				
+				for t in range(0,3):
+					try :
+						if (not(data[i][t].get()<(ma+ecartType) and data[i][t].get()>(mi-ecartType))):
+							unusual =unusual+ '\n'+ realValued[i] + "No" + str(t+1) + ","
+					except TclError :
+						print("problemes de data")
 
-	if(len(unusual)>0):
-		p.append("UnusualValues at :\n"+ unusual)
+		except urllib.error.HTTPError as error:
+		    unusual="error while reading"
 
+		if(len(unusual)>0):
+			p.append("UnusualValues at :\n"+ unusual)
+	return OK
 
 
 fenetre = Tk()
@@ -152,8 +160,8 @@ def calcul():
 
 		unusual = []
 
-		UnusualValues(values2,unusual)
-
+		TestSEcuFile=UnusualValues(values2,unusual)
+		
 		OK=False
 
 		if(len(unusual)==0):
@@ -162,6 +170,16 @@ def calcul():
 			OK = True
 		else :
 			Ok = False
+
+		try :
+			file_Key = open("../SecuAccess/Api_key.txt", "r")
+			api_key = file_Key.read()
+			file_url = open("../SecuAccess/Web_Service.txt", "r")
+			url = file_url.read()
+		except FileNotFoundError :
+			OK=False
+			if(TestSEcuFile):
+				showerror('Security File not found', 'You probably don\'t have The Security File contact the responsable ')
 
 		if(OK):
 			val=[]
@@ -185,11 +203,6 @@ def calcul():
 
 			body = str.encode(json.dumps(data))
 
-			file_Key = open("../SecuAccess/Api_key.txt", "r")
-			file_url = open("../SecuAccess/Web_Service.txt", "r")
-
-			url = file_url.read()
-			api_key = file_Key.read()
 			headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 			req = urllib.request.Request(url, body, headers) 
