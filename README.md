@@ -44,9 +44,9 @@ MLSW is a software _S_ such that:
 	For now, the cells are taken by fine needle aspirate (FNA) of a breast mass.
 And the caracterics are computed from a digitized image of this needle.
 
-We can imagine in a near futur a kind of device, that can take and analyse this cells a home and return the cells Features.
+	We can imagine in a near futur a kind of device, that can take and analyse this cells a home and return the cells Features.
 
-And the woman would be allowed to compute this features in the Application and know instantly the result.
+	And the woman would be allowed to compute this features in the Application and know instantly the result.
 Lyke that they'll know if they need to go see a doctor or juste wate to see how it turned.
 
 2. Risks :
