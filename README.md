@@ -88,6 +88,7 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 	My idea is to create a model which tries to assign a quality indicator (subjective) to a wine bottle depending on the physical (objective) properties of the bottle. 
 	By computing the quality of a given bottle, wine resellers may be able to infer the popularity of said bottle without relying on market studies or other non-automatic models which may very well be both less accurate and more expensive.
+	The dataset I used for my predictive model can be found [here](https://archive.ics.uci.edu/ml/datasets/Wine+Quality)
 
 2. Risk study:
 
