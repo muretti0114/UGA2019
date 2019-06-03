@@ -126,7 +126,7 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 1. Project motivation : 
 
-To stay in the theme, I chosen to study the differents factors which affects a student during his scholar year. For this, I finded an interesting dataset about India's students informations, with a column which indicates the "End semester Percentage", in another words, if a student will pass achieve the university year. That's the most interesting field, so we'll try to predict it.
+To stay in the theme, I chosen to study the differents factors which affects a student during his scholar year. For this, I found an interesting dataset about India's students informations, with a column which indicates the "End semester Percentage", in another words, if a student will pass achieve the university year. That's the most interesting field, so we'll try to predict it.
 It could be a very interesting algorithms for all Indian Universitys which wants to select the students who deserve the most.
 
 2. Risk & Threats Investivation
@@ -154,6 +154,30 @@ So to implements all of the security issues above, here is my plan :
 - For the API Key privacy, I stored it in a private local file.
 
 - To go further, Azure Keyvault looks like very interesting to verify signatures between messages.
+
+### Bastien's Application : Men fertility test
+
+1. Project motivation :
+
+I wanted to find a simple dataset to do an easy to grasp application. So i focused the fertility of men between 18 and 36. The dataset ([source](https://archive.ics.uci.edu/ml/datasets/Fertility)) have only 9 attribute in order to guess if the fertility is normal or altered. The goal of my application is to ask few questions to fill these 9 attributes, compute this with my model and tell the user if it's the good moment to have a baby. If it's not, the user will receive advice according to his entry.
+
+2. Risks and Threats handling :
+
+Here's the various risks i handled :
+
+- Checking of the entry : the user can only enter eligibles values
+
+- Getting out the url and api key of the source code. They are now in a local file readed in the code.
+
+- Connection checking : If there is no internet connection, the application is not accessible.
+
+- Result checking : After the computation by Azure ML, and after printing results/advices to the user, the script compute the same data again and check if the original result was the same. This way if the first result have been modified, i will check it. This is not the best way but it's a starting point.
+
+Given that our model is located in Azure ML studio, the checking of the model integrity is not necessary.
+
+3. Documentation :
+
+The python script use python 3+ version. So to run it the only thing to do is to have that version of python. According to your OS, the execution can be something like python Decision.py or python3 Decision.py
 
 ## Deliverables
 
