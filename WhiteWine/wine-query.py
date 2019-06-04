@@ -5,6 +5,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
 
+# UI
+root = Tk()
+root.title("White wine quality prediction")
+
 data = {
     "Inputs": {
         "input1": {
@@ -31,7 +35,7 @@ data = {
 
 # dataset data
 metadata = {}
-fiability = 10/100  # coefficient of fiability of input data compared to dataset data
+fiability = 10  # coefficient of fiability of input data compared to dataset data (%)
 
 # result variables
 prices = {}
@@ -112,9 +116,9 @@ def add_wine(dataset, price_table, feature_list):
                 print("Error: " + v + " < 0")
                 return
             else:
-                if feature_list[v].get() < metadata[v][0] or feature_list[v].get() > metadata[v][1]:
+                if feature_list[v].get() < metadata[v][0] - metadata[v][0] * fiability/100 or feature_list[v].get() > metadata[v][1] + metadata[v][1] * fiability/100:
                     print("Error: " + v + " out of range. Allowed interval: [" + str(
-                        metadata[v][0]) + ", " + str(metadata[v][1]) + "]")
+                        metadata[v][0] - metadata[v][0] * fiability/100) + ", " + str(metadata[v][1] + metadata[v][1] * fiability/100) + "]")
                     return
                 else:
                     new_wine.append(str(feature_list[v].get()))
@@ -145,8 +149,6 @@ def main():
 get_dataset_summary(metadata)
 
 #UI
-root = Tk()
-root.title("White wine quality prediction")
 
 mainframe = ttk.Frame(root, padding="3 3 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
@@ -175,62 +177,85 @@ ttk.Label(mainframe, text="Fixed acidity").grid(column=1, row=1, sticky=E)
 fixed_acidity_entry = ttk.Entry(
     mainframe, width=10, textvariable=fixed_acidity)
 fixed_acidity_entry.grid(column=2, row=1, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["fixed acidity"][0] - metadata["fixed acidity"][0] * fiability/100) + " ~ " + str(
+    metadata["fixed acidity"][1] + metadata["fixed acidity"][1] * fiability/100)).grid(column=3, row=1, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Volatile Acidity").grid(column=1, row=2, sticky=E)
 volatile_acidity_entry = ttk.Entry(
     mainframe, width=10, textvariable=volatile_acidity)
 volatile_acidity_entry.grid(column=2, row=2, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["volatile acidity"][0] - metadata["volatile acidity"][0] * fiability/100) + " ~ " + str(
+    metadata["volatile acidity"][1] + metadata["volatile acidity"][1] * fiability/100)).grid(column=3, row=2, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Citric Acid").grid(column=1, row=3, sticky=E)
 citric_acid_entry = ttk.Entry(mainframe, width=10, textvariable=citric_acid)
 citric_acid_entry.grid(column=2, row=3, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["citric acid"][0] - metadata["citric acid"][0] * fiability/100) + " ~ " + str(
+    metadata["citric acid"][1] + metadata["citric acid"][1] * fiability/100)).grid(column=3, row=3, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Residual Sugar").grid(column=1, row=4, sticky=E)
 residual_sugar_entry = ttk.Entry(
     mainframe, width=10, textvariable=residual_sugar)
-residual_sugar_entry.grid(column=2, row=4, padx=5, pady=5, sticky=(E))
+residual_sugar_entry.grid(column=2, row=4, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["residual sugar"][0] - metadata["residual sugar"][0] * fiability/100) + " ~ " + str(
+    metadata["residual sugar"][1] + metadata["residual sugar"][1] * fiability/100)).grid(column=3, row=4, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Chlorides").grid(column=1, row=5, sticky=E)
 chlorids_entry = ttk.Entry(mainframe, width=10, textvariable=chlorides)
-chlorids_entry.grid(column=2, row=5, padx=5, pady=5, sticky=(E))
+chlorids_entry.grid(column=2, row=5, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["chlorides"][0] - metadata["chlorides"][0] * fiability/100) + " ~ " + str(
+    metadata["chlorides"][1] + metadata["chlorides"][1] * fiability/100)).grid(column=3, row=5, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Free Sulfur Dioxide").grid(
     column=1, row=6, sticky=E)
 free_sulfur_dioxide_entry = ttk.Entry(
     mainframe, width=10, textvariable=free_sulfur_dioxide)
-free_sulfur_dioxide_entry.grid(column=2, row=6, padx=5, pady=5, sticky=(E))
+free_sulfur_dioxide_entry.grid(column=2, row=6, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["free sulfur dioxide"][0] - metadata["free sulfur dioxide"][0] * fiability/100) + " ~ " + str(
+    metadata["free sulfur dioxide"][1] + metadata["free sulfur dioxide"][1] * fiability/100)).grid(column=3, row=6, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Total Sulfur Dioxide").grid(
     column=1, row=7, sticky=E)
 total_sulfur_dioxide_entry = ttk.Entry(
     mainframe, width=10, textvariable=total_sulfur_dioxide)
-total_sulfur_dioxide_entry.grid(column=2, row=7, padx=5, pady=5, sticky=(E))
+total_sulfur_dioxide_entry.grid(column=2, row=7, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["total sulfur dioxide"][0] - metadata["total sulfur dioxide"][0] * fiability/100) + " ~ " + str(
+    metadata["total sulfur dioxide"][1] + metadata["total sulfur dioxide"][1] * fiability/100)).grid(column=3, row=7, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Density").grid(column=1, row=8, sticky=E)
 density_entry = ttk.Entry(mainframe, width=10, textvariable=density)
-density_entry.grid(column=2, row=8, padx=5, pady=5, sticky=(E))
+density_entry.grid(column=2, row=8, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["density"][0] - metadata["density"][0] * fiability/100) + " ~ " + str(
+    metadata["density"][1] + metadata["density"][1] * fiability/100)).grid(column=3, row=8, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="pH").grid(column=1, row=9, sticky=E)
 pH_entry = ttk.Entry(mainframe, width=10, textvariable=pH)
-pH_entry.grid(column=2, row=9, padx=5, pady=5, sticky=(E))
+pH_entry.grid(column=2, row=9, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["pH"][0] - metadata["pH"][0] * fiability/100) + " ~ " + str(
+    metadata["pH"][1] + metadata["pH"][1] * fiability/100)).grid(column=3, row=9, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Sulphates").grid(column=1, row=10, sticky=E)
 sulphates_entry = ttk.Entry(mainframe, width=10, textvariable=sulphates)
-sulphates_entry.grid(column=2, row=10, padx=5, pady=5, sticky=(E))
+sulphates_entry.grid(column=2, row=10, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["sulphates"][0] - metadata["sulphates"][0] * fiability/100) + " ~ " + str(
+    metadata["sulphates"][1] + metadata["sulphates"][1] * fiability/100)).grid(column=3, row=10, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Alcohol").grid(column=1, row=11, sticky=E)
 alcohol_entry = ttk.Entry(mainframe, width=10, textvariable=alcohol)
-alcohol_entry.grid(column=2, row=11, padx=5, pady=5, sticky=(E))
+alcohol_entry.grid(column=2, row=11, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text=str(metadata["alcohol"][0] - metadata["alcohol"][0] * fiability/100) + " ~ " + str(
+    metadata["alcohol"][1] + metadata["alcohol"][1] * fiability/100)).grid(column=3, row=11, padx=5, pady=5, sticky=(W, E))
 
 ttk.Label(mainframe, text="Price").grid(column=1, row=12, sticky=E)
 price_entry = ttk.Entry(mainframe, width=10, textvariable=price)
-price_entry.grid(column=2, row=12, padx=5, pady=5, sticky=(E))
+price_entry.grid(column=2, row=12, padx=5, pady=5, sticky=(W, E))
+ttk.Label(mainframe, text="0 ~ ∞").grid(column=3, row=12, padx=5, pady=5, sticky=(W, E))
 
 ttk.Button(mainframe, text="Add", command=lambda: add_wine(
-    data, prices, var_list)).grid(column=1, row=13, sticky=(W))
+    data, prices, var_list)).grid(column=1, row=13, sticky=(W, E))
 ttk.Button(mainframe, text="Reset", command=lambda: reset_data(
-    data, qualities, prices)).grid(column=2, row=13, sticky=(W))
+    data, qualities, prices)).grid(column=2, row=13, sticky=(W, E))
 ttk.Button(mainframe, text="Run experiment", command=main).grid(
-    column=1, row=14, columnspan=2, sticky=(W, E))
+    column=3, row=13, columnspan=1, sticky=(W, E))
 
 root.mainloop()
