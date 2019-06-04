@@ -57,9 +57,9 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 	* The Web service could shut down :
 
-		The costumer should know that the service is momentarily unavailable.
+		The customer should know that the service is momentarily unavailable.
 
-	* The values entered by the costumer can be wrong
+	* The values entered by the customer can be wrong
 
 	* Privacy and Cyber-sécurity
 
@@ -67,13 +67,13 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 	* Accuracy :
 
-		The data should be regularly analysed and updated, because some occurrence of new values unknowned till now could occured, in this case the app should warned the costumer that the values seems strange and the accurtacy could be lowered. 
+		The data should be regularly analysed and updated, because some occurrence of new values unknowned till now could occured, in this case the app should warned the customer that the values seems strange and the accurtacy could be lowered. 
 
-		Those  occurrence could be explained, by an wrong entered values by the costumer too, so before any more analyzes it could be good to ask  him if he as not type the wrong value.
+		Those  occurrence could be explained, by an wrong entered values by the customer too, so before any more analyzes it could be good to ask  him if he as not type the wrong value.
 
 	* Connection :
 
-		The easiest way to cop with this risk is to check before sending the values on the web service. And warned the costumer if the service is down.
+		The easiest way to cop with this risk is to check before sending the values on the web service. And warned the customer if the service is down.
 
 	* Values entered :
 
@@ -81,7 +81,7 @@ Lyke that they'll know if they need to go see a doctor or juste wate to see how 
 
 	* Security :
 
-		For now the url and the Api_key are not transmited the owner of the App should give it to the costumer, but later some system of log in and subscription to the service, could be implemented to create a secure access for the costumer.
+		For now the url and the Api_key are not transmited the owner of the App should give it to the customer, but later some system of log in and subscription to the service, could be implemented to create a secure access for the user.
 
 ### White wine quality prediction (Lucas)
 1. Project motivation:
