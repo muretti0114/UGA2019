@@ -10,6 +10,11 @@ Repository for Grenoble Projects in 2019
 - Lucas Gisselaire (UGA)
 - Lydie du Bousquet (UGA)
 
+## Meeting Logs
+- [2019-06-04](./docs/20190604_discussion.md)
+- [2019-05-24](./docs/20190524_discussion.md)
+
+
 ## Project Goal
 
 Develop concepts, architectures, and methods that can assure the quality, 
