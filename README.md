@@ -147,7 +147,7 @@ The python script use python 3+ version. So to run it the only thing to do is to
 
 ## References
 
-See [./refs] for relevant papers.
+See [refs directory](./refs/) for relevant papers.
 
 
 
