@@ -145,5 +145,10 @@ The python script use python 3+ version. So to run it the only thing to do is to
 - [Application Examples](./examples/)
 
 
+## References
+
+See [./refs] for relevant papers.
+
+
 
 
