@@ -195,7 +195,8 @@ if(not fileMissing):
                     print("You should wait for few month")
                 if(smoking >= 0 or alcohol <= 3):
                     print("Maybe you should try to change your habbits (less drinking or smoking for example)")
-
+            resultConfidence = round(float(resultParsed["Results"]["output1"]["value"]["Values"][0][1])*100,2)
+            print("Result confidence : "+str(resultConfidence)+"%")
             response2 = urllib.request.urlopen(req)
             result2 = response2.read().decode('utf-8')
             if(result != result2):
