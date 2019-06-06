@@ -10,6 +10,11 @@ Repository for Grenoble Projects in 2019
 - Lucas Gisselaire (UGA)
 - Lydie du Bousquet (UGA)
 
+## Meeting Logs
+- [2019-06-04](./docs/20190604_discussion.md)
+- [2019-05-24](./docs/20190524_discussion.md)
+
+
 ## Project Goal
 
 Develop concepts, architectures, and methods that can assure the quality, 
@@ -34,60 +39,14 @@ MLSW is a software _S_ such that:
 1. Develop methods to cope with the risks and the threats.
 1.
 
-### Quentin App (Breast Cancer Diagnosys)
-1. Motivation :
-
-	Women Could seen the appearance of cyst in there breast. Those cyst could turned into a cancer or disappeared with time. The thing is that they don't know except if they go to the medic and do some medicals examinations.
-
-	The main goal is, thanks to a machine learning computation, creating a model that recognise, if a breast cyst is benign or malignant, with the caracteristiques of taken cyst's cells.
-
-	For now, the cells are taken by fine needle aspirate (FNA) of a breast mass.
-And the caracterics are computed from a digitized image of this needle.
-
-	We can imagine in a near futur a kind of device, that can take and analyse this cells a home and return the cells Features.
-
-	And the woman would be allowed to compute this features in the Application and know instantly the result.
-Lyke that they'll know if they need to go see a doctor or juste wate to see how it turned.
-
-2. Risks :
-
-	* The accuracy should be really high :
-
-		If it isn't then in one case, it could only be a false alarm that is not threatening but only scaring. But in the other case it could be really dangerous for the woman thinking that it's not malignant and let the cancer spread without taking action against it.
-
-	* The Web service could shut down :
-
-		The costumer should know that the service is momentarily unavailable.
-
-	* The values entered by the costumer can be wrong
-
-	* Privacy and Cyber-sécurity
-
-3. Coping with the risks
-
-	* Accuracy :
-
-		The data should be regularly analysed and updated, because some occurrence of new values unknowned till now could occured, in this case the app should warned the costumer that the values seems strange and the accurtacy could be lowered. 
-
-		Those  occurrence could be explained, by an wrong entered values by the costumer too, so before any more analyzes it could be good to ask  him if he as not type the wrong value.
-
-	* Connection :
-
-		The easiest way to cop with this risk is to check before sending the values on the web service. And warned the costumer if the service is down.
-
-	* Values entered :
-
-		Few thing should be check : positivs values, Only numbers allowed, all values field.
-
-	* Security :
-
-		For now the url and the Api_key are not transmited the owner of the App should give it to the costumer, but later some system of log in and subscription to the service, could be implemented to create a secure access for the costumer.
+### [Quentin App (Breast Cancer Diagnosys)](./BreastCancer/note.md)
 
 ### White wine quality prediction (Lucas)
 1. Project motivation:
 
 	My idea is to create a model which tries to assign a quality indicator (subjective) to a wine bottle depending on the physical (objective) properties of the bottle. 
 	By computing the quality of a given bottle, wine resellers may be able to infer the popularity of said bottle without relying on market studies or other non-automatic models which may very well be both less accurate and more expensive.
+	The dataset I used for my predictive model can be found [here](https://archive.ics.uci.edu/ml/datasets/Wine+Quality)
 
 2. Risk study:
 
@@ -184,6 +143,11 @@ The python script use python 3+ version. So to run it the only thing to do is to
 - Quentin App : run the script [StartBCancerDiagnosys.sh](./StartBCancerDiagnosys.sh)
 
 - [Application Examples](./examples/)
+
+
+## References
+
+See [refs directory](./refs/) for relevant papers.
 
 
 
